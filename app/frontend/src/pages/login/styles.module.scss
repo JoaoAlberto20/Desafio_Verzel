@@ -129,12 +129,15 @@
 
   background: $gray700;
   color: $white;
+  transition: all 0.3s;
 
   border-radius: 3px;
   margin-top: 40px;
+  cursor: pointer;
 
   &:disabled {
     background: $gray100;
     color: $gray200;
+    cursor: not-allowed;
   }
 }
