@@ -1,0 +1,74 @@
+$font-base: 'Roboto', sans-serif;
+
+$white: #ffffff;
+
+$gray100: #ecf1f8;
+$gray200: #5b5b5b;
+$gray300: #c7c7c7;
+$gray500: #333333;
+$gray700: #000000;
+
+$blue500: #3374db;
+$blue700: #0a448a;
+
+$yellow500: #d2ed00;
+
+$red: red;
+
+$gap-0: 0px;
+$gap-1: 8px;
+$gap-2: 16px;
+$gap-3: 24px;
+$gap-4: 32px;
+$gap-5: 48px;
+$gap-6: 64px;
+$gap-7: 72px;
+$gap-8: 96px;
+$gap-9: 128px;
+$gap-10: 148px;
+
+@mixin responsive-desktop {
+  @media (min-width: 992px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin responsive-tablet {
+  @media (min-width: 768px) and (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin responsive-mobile {
+  @media (min-width: 576px) and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin flexbox-row() {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin flexbox-column() {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin grid-layout() {
+  max-width: 1180px;
+  margin: 0 auto;
+
+  @include responsive-desktop {
+    max-width: 960px;
+  }
+
+  @include responsive-tablet {
+    max-width: 720px;
+  }
+
+  @include responsive-mobile {
+    max-width: 540px;
+  }
+}

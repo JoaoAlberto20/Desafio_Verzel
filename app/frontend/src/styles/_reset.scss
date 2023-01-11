@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button,
+input {
+  all: unset;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+body {
+  background-color: $white;
+  -webkit-font-smoothing: antialiased;
+  background: $gray100;
+}
+
+body,
+input,
+button,
+textarea {
+  font-family: $font-base;
+  font-size: 1rem;
+  color: $gray500;
+  line-height: 1.5;
+}
+
+main {
+  min-height: calc(100vh - 84px);
+}

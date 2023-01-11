@@ -1,0 +1,83 @@
+@import '../../styles/variables.scss';
+
+.app_header {
+  height: 84px;
+  width: 100%;
+  background-color: $white;
+  box-shadow: 0 0.063rem 0.313rem 0 rgb(70 70 70 / 15%),
+    0 0.125rem 0.125rem 0 rgb(70 70 70 / 15%),
+    0 0.188rem 0.125rem -0.125rem rgb(70 70 70 / 15%);
+}
+
+.app_header_content {
+  @include grid-layout;
+
+  @include flexbox-row;
+  height: 100%;
+  align-items: center;
+}
+
+.app_header_content_logo {
+  padding: 0 $gap-2;
+
+  svg {
+    width: 112px;
+    height: 30px;
+  }
+}
+
+.app_header_content_nav {
+  padding: 0 $gap-2;
+  flex: 1;
+
+  @include flexbox-row;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+
+  @media (max-width: 990px) {
+    display: none;
+  }
+}
+
+.app_header_content_nav_ul {
+  @include flexbox-row;
+  gap: $gap-4;
+
+
+  li a {
+    font-size: 1rem;
+    font-weight: 500;
+    color: $gray500;
+    opacity: 0.85;
+  }
+
+  li a:hover {
+    opacity: 1;
+
+  }
+
+  li a:active {
+    color: $blue500
+  }
+
+}
+
+
+.app_header_content_nav_login {
+  margin-left: $gap-4;
+
+  a {
+    @include flexbox-row;
+    height: 100%;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  a span {
+    line-height: 100%;
+    color: $gray500;
+    opacity: 0.85;
+  }
+
+}

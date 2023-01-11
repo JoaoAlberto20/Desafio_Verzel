@@ -1,0 +1,140 @@
+@import '../../styles/variables.scss';
+
+.app_login {
+  @include flexbox-row;
+  flex-wrap: nowrap;
+}
+
+.app_login_banner {
+  display: block;
+  width: 55%;
+  max-width: 448px;
+  min-height: calc(100vh - 84px);
+  background: 50%;
+  background-size: cover;
+  background-image: url('../../assets/showroom.jpg');
+
+  @media (max-width: 990px) {
+    display: none
+  }
+}
+
+
+.app_login_content {
+  max-width: 27.5rem;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 40px;
+
+
+  @media (max-width: 990px) {
+    @include grid-layout;
+    margin-top: 40px;
+    padding: 0 $gap-2;
+  }
+}
+
+.app_login_content form {
+  padding: 100px 50px 30px;
+
+  background-color: $white;
+  border-radius: 6px;
+
+
+  strong {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 540px) {
+    padding: 100px 16px 30px 16px;
+  }
+}
+
+.app_login_content_form_inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  width: 100%;
+  position: relative;
+
+  position: relative;
+
+  margin-top: 40px;
+
+  label {
+    position: absolute;
+    display: block;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s;
+
+    font-size: 1rem;
+    color: $gray200;
+    pointer-events: none;
+
+  }
+
+  &:focus-within label {
+    top: 0;
+    transform: translateY(-50%);
+
+    background: $white;
+    color: $blue500;
+
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+.app_login_content_form_inputs input {
+  font-weight: 300;
+  font-size: 1rem;
+
+  border-radius: 3px;
+  border: 1px solid $gray300;
+
+  padding: 1rem;
+
+  &:focus {
+    border-color: $blue500;
+  }
+
+}
+
+.app_login_content_form_forgot_password {
+  margin-top: 2.5rem;
+
+  a {
+    color: $blue500;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s;
+  }
+
+  a:hover {
+    border-bottom-color: $blue500;
+  }
+}
+
+.app_login_content_form_button {
+  width: 100%;
+  font-weight: 400;
+  height: 46px;
+
+  text-align: center;
+
+  background: $gray700;
+  color: $white;
+
+  border-radius: 3px;
+  margin-top: 40px;
+
+  &:disabled {
+    background: $gray100;
+    color: $gray200;
+  }
+}
