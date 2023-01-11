@@ -1,0 +1,22 @@
+{
+  "name": "desafio_verzel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compose:up:dev": "cd app && docker-compose -f docker-compose.yml up -d --build",
+    "compose:down:dev": "cd app && docker-compose down --remove-orphans",
+    "logs": "cd app && docker-compose logs backend -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoAlberto20/Desafio_Verzel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoaoAlberto20/Desafio_Verzel/issues"
+  },
+  "homepage": "https://github.com/JoaoAlberto20/Desafio_Verzel#readme"
+}

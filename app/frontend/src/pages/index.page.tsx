@@ -10,6 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <title>Home | Comprar carros usados no brasil</title>
       </Head>
+      <h1>Hom</h1>
     </>
   )
 }

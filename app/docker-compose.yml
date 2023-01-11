@@ -1,27 +1,6 @@
 version: '3.9'
 
 services:
-  backend:
-    image: django-docker:0.0.1
-    container_name: backend
-    build: ./backend
-    ports:
-      - 8000:8000
-    working_dir: /app/backend
-    volumes:
-      - ./backend:/app/backend
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: "always"
-    environment:
-      - DJANGO_SUPERUSER_PASSWORD=joaoalberto
-      - DJANGO_SUPERUSER_USERNAME=joaoalberto
-      - DJANGO_SUPERUSER_EMAIL=joaoalbertosv15@gmail.com
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/api/"]
-      timeout: 15s
-      retries: 5
   db:
     image: mysql:8.0.21
     container_name: database
@@ -31,10 +10,33 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_DATABASE=verzel_desafio
-    restart: 'always'
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 10s
       retries: 5
     cap_add:
       - SYS_NICE # Deve omitir alertas menores
+  backend:
+    container_name: backend
+    build: ./backend
+    ports:
+      - 8000:8000
+    platform: linux/x86_64
+    working_dir: /app-backend
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SUPERUSER_PASSWORD=joaoalberto
+      - DJANGO_SUPERUSER_USERNAME=joaoalberto
+      - DJANGO_SUPERUSER_EMAIL=joaoalbertosv15@gmail.com
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
