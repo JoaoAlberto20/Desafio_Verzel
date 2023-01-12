@@ -47,7 +47,6 @@ export function SectionFilter() {
           </div>
           <div className={styles.app_section_filter_controller_result_select}>
             <span>2.944 resultados</span>
-            <h2>Olea</h2>
           </div>
         </div>
       </div>

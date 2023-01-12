@@ -3,6 +3,8 @@
 .app_layout_content {
   @include grid-layout;
   padding: 0 $gap-2;
+
+  padding-bottom: 50px;
 }
 
 .app_layout_content_cards {

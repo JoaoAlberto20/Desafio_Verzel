@@ -1,3 +1,5 @@
+@import '../styles/variables.scss';
+
 * {
   padding: 0;
   margin: 0;
@@ -47,7 +49,6 @@ html {
 }
 
 body {
-  background-color: $white;
   -webkit-font-smoothing: antialiased;
   background: $gray100;
 }

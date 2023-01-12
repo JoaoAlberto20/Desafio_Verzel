@@ -1,8 +1,8 @@
 @import '../../styles//variables.scss';
 
 .app_section_filters {
-  padding-bottom: 4px;
-  background: $white;
+  margin-bottom: 10px;
+  background: $gray100;
 }
 
 section.app_section_filters[aria-controls="true"] {
