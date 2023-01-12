@@ -1,0 +1,145 @@
+@import '../../styles//variables.scss';
+
+.app_section_filters {
+  padding-bottom: 4px;
+  background: $white;
+}
+
+section.app_section_filters[aria-controls="true"] {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+
+.app_section_filter_content_search {
+  background: $blue500;
+  padding: 0.5rem;
+}
+
+.app_section_filter_content_search_form,
+.app_section_filter_content_bottom {
+  @include grid-layout;
+  padding: 0 $gap-2;
+}
+
+.app_section_filter_content_input_search_form form {
+  padding: 0 8px;
+}
+
+.app_section_filter_input_content {
+  position: relative;
+}
+
+.app_section_filter_input_content input::placeholder {
+  color: $gray200
+}
+
+.app_section_filter_input_content button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: 1px;
+  padding-right: 1rem;
+  height: 100%;
+  cursor: pointer;
+
+  svg {
+    fill: $gray200
+  }
+
+  &:hover svg {
+    fill: $blue500;
+  }
+}
+
+.app_section_filter_content_title {
+  margin-top: 20px;
+
+  strong {
+    display: inline-block;
+    line-height: 1.5;
+    font-size: 20px;
+    color: $gray500;
+    font-weight: 400;
+  }
+}
+
+.app_section_filter_controller {
+  @include flexbox-row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.app_section_filter_controller_buttons {
+  width: 18.75rem;
+  min-width: 18.75rem;
+  @include flexbox-row;
+  justify-content: space-between;
+  align-items: center;
+
+
+  height: 55px;
+
+  @media (max-width: 990px) {
+    display: none;
+  }
+}
+
+.app_section_filter_controller_buttons button {
+  @include flexbox-row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1rem;
+
+  transition: all 0.3s;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.app_section_filter_controller_buttons .show_filter {
+  color: $gray700;
+  font-size: .875rem;
+  font-weight: 700;
+
+  &:hover {
+    color: $blue500;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}
+
+.app_section_filter_controller_buttons .remove_filter {
+  &:hover {
+    color: red;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}
+
+.app_section_filter_controller_result_select {
+  @include flexbox-row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+
+  span {
+    color: $gray200
+  }
+
+  @media (min-width: 990px) {
+    span {
+      margin-left: 18px;
+    }
+  }
+}

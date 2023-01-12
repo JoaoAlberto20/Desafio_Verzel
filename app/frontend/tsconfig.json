@@ -29,8 +29,8 @@
       "@services/*": [
         "src/services/*"
       ],
-      "@dtos/*": [
-        "src/dtos/*"
+      "@interfaces/*": [
+        "src/interfaces/*"
       ],
       "@assets/*": [
         "src/assets/*"

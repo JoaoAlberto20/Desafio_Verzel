@@ -1,7 +1,8 @@
-import { Header } from '@components/Header'
 import { ReactNode } from 'react'
 
-type LayoutProps = {
+import { Header } from '@components/Header'
+
+interface LayoutProps {
   children: ReactNode
 }
 

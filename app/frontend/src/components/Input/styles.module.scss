@@ -1,0 +1,65 @@
+@import '../../styles/variables.scss';
+
+.app_login_content_form_control {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+
+  width: 100%;
+  position: relative;
+}
+
+.app_login_content_form_control label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s;
+
+  font-size: 1rem;
+  color: $gray200;
+  pointer-events: none;
+}
+
+.app_login_content_form_control input {
+  font-weight: 300;
+  font-size: 1rem;
+
+  border-radius: 3px;
+  border: 1px solid $gray300;
+  background: $white;
+
+  padding: 1rem;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:hover,
+  &:not(:placeholder-shown) {
+    border-color: $blue500;
+  }
+
+  &:focus::placeholder {
+    color: $gray200
+  }
+
+  &:focus~label,
+  &:not(:placeholder-shown)~label {
+    top: 0;
+    transform: translateY(-50%);
+
+    background: $white;
+    color: $blue500;
+
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+.helper_text {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: red;
+}

@@ -1,3 +1,5 @@
+import { Button } from '@components/Button'
+import { Input } from '@components/Input'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -5,11 +7,11 @@ import * as yup from 'yup'
 import styles from './styles.module.scss'
 
 const loginFormSchemas = yup.object({
-  email: yup.string().email('E-mail invalido.').required('Informe o email.'),
+  username: yup.string().required('Informe o seu nome de usuário.'),
   password: yup
     .string()
     .required('Informe a senha.')
-    .min(6, 'A senha deve ter pelo menos 6 números.'),
+    .min(8, 'A senha deve ter pelo menos 8 digito.'),
 })
 
 type TypesLoginFormData = yup.InferType<typeof loginFormSchemas> & {}
@@ -18,11 +20,11 @@ export default function Login() {
   const {
     handleSubmit,
     control,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm<TypesLoginFormData>({
     resolver: yupResolver(loginFormSchemas),
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
   })
@@ -40,50 +42,42 @@ export default function Login() {
           onSubmit={handleSubmit(handleLoginUser)}
         >
           <strong>Painel administrativo</strong>
-          <div className={styles.app_login_content_form_inputs}>
-            <label htmlFor="input-email-user" className={styles.label}>
-              E-mail
-            </label>
-            <Controller
-              control={control}
-              name="email"
-              render={({ field: { name, onChange, value } }) => (
-                <input
-                  type="text"
-                  name={name}
-                  onChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </div>
-          <div className={styles.app_login_content_form_inputs}>
-            <label htmlFor="input-email-user" className={styles.label}>
-              Senha
-            </label>
-            <Controller
-              control={control}
-              name="password"
-              render={({ field: { name, onChange, value } }) => (
-                <input
-                  type="password"
-                  name={name}
-                  onChange={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </div>
+          <Controller
+            control={control}
+            name="username"
+            render={({ field: { name, onChange, value } }) => (
+              <Input
+                type="text"
+                label="Username"
+                name={name}
+                onChange={onChange}
+                value={value}
+                placeholder="joaoalberto"
+                errorMessage={errors.username?.message}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { name, onChange, value } }) => (
+              <Input
+                type="password"
+                label="Password"
+                placeholder="@joao?lberto@"
+                name={name}
+                onChange={onChange}
+                value={value}
+                errorMessage={errors.password?.message}
+              />
+            )}
+          />
           <div className={styles.app_login_content_form_forgot_password}>
             <a href="#">Esqueceu a senha?</a>
           </div>
-          <button
-            type="submit"
-            className={styles.app_login_content_form_button}
-            disabled={!isValid}
-          >
+          <Button type="submit" disabled={!isValid}>
             Iniciar sessão
-          </button>
+          </Button>
         </form>
       </div>
     </div>

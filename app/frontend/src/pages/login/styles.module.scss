@@ -35,7 +35,11 @@
 }
 
 .app_login_content form {
+  @include flexbox-column;
+  gap: 40px;
+
   padding: 100px 50px 30px;
+
 
   background-color: $white;
   border-radius: 6px;
@@ -53,62 +57,7 @@
   }
 }
 
-.app_login_content_form_inputs {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex-wrap: nowrap;
-  width: 100%;
-  position: relative;
-
-  position: relative;
-
-  margin-top: 40px;
-
-  label {
-    position: absolute;
-    display: block;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s;
-
-    font-size: 1rem;
-    color: $gray200;
-    pointer-events: none;
-
-  }
-
-  &:focus-within label {
-    top: 0;
-    transform: translateY(-50%);
-
-    background: $white;
-    color: $blue500;
-
-    font-size: 0.75rem;
-    line-height: 1.4;
-  }
-}
-
-.app_login_content_form_inputs input {
-  font-weight: 300;
-  font-size: 1rem;
-
-  border-radius: 3px;
-  border: 1px solid $gray300;
-
-  padding: 1rem;
-
-  &:focus {
-    border-color: $blue500;
-  }
-
-}
-
 .app_login_content_form_forgot_password {
-  margin-top: 2.5rem;
-
   a {
     color: $blue500;
     border-bottom: 1px solid transparent;
@@ -117,27 +66,5 @@
 
   a:hover {
     border-bottom-color: $blue500;
-  }
-}
-
-.app_login_content_form_button {
-  width: 100%;
-  font-weight: 400;
-  height: 46px;
-
-  text-align: center;
-
-  background: $gray700;
-  color: $white;
-  transition: all 0.3s;
-
-  border-radius: 3px;
-  margin-top: 40px;
-  cursor: pointer;
-
-  &:disabled {
-    background: $gray100;
-    color: $gray200;
-    cursor: not-allowed;
   }
 }

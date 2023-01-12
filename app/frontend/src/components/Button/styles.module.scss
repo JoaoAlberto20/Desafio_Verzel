@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.app_login_content_form_button {
+  width: 100%;
+  font-weight: 400;
+  height: 46px;
+
+  text-align: center;
+
+  background: $gray700;
+  color: $white;
+  transition: all 0.3s;
+
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:disabled {
+    background: $gray100;
+    color: $gray200;
+    cursor: not-allowed;
+  }
+}

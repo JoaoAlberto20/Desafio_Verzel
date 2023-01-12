@@ -5,6 +5,10 @@ const nextConfig = {
 
   pageExtensions: ['page.tsx', 'api.ts', 'api.tsx'],
 
+  images: {
+    domains: ['images.kavak.services'],
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
