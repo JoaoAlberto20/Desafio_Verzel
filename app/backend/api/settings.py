@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
+
 # import os
 # from datetime import timedelta
 
@@ -40,7 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "cars",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -54,19 +58,21 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    "NON_FIELD_ERRORS_KEY": "errors",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated"),
 }
 
-# SIMPLE_JWT = {
-#     # 'JWT_VERIFY_EXPIRATION': False,  # desabilita a verificação de expiração
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=99999),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-#     'BLACKLIST_AFTER_ROTATION': False,
-#     'SIGNING_KEY': os.environ.get('SECRET_KEY_JWT', 'INSECURE'),
-#     'AUTH_HEADER_TYPES': ('Bearer',),
-# }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer"),
+}
 
 
 ROOT_URLCONF = "api.urls"
@@ -99,7 +105,7 @@ DATABASES = {
         "NAME": "verzel_desafio",
         "USER": "root",
         "PASSWORD": "123456",
-        "HOST": "db",
+        "HOST": "127.0.0.1",
         "PORT": "3306",
     }
 }
@@ -140,6 +146,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+
+
+AUTH_USER_MODEL = "users.User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
