@@ -36,7 +36,10 @@ class SignUpSerializer(serializers.ModelSerializer):
         return user
 
 
-class SignInSerializers(serializers.ModelSerializer):
+class LoginSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=80)
+    password = serializers.CharField(min_length=8, write_only=True)
+
     class Meta:
         model = User
         exclude = ["password", "last_login", "is_staff", "is_active", "date_joined", "groups"]
