@@ -15,6 +15,7 @@
   @include flexbox-row;
   height: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
 .app_header_content_logo {
@@ -33,7 +34,7 @@
   @include flexbox-row;
   height: 100%;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 
   @media (max-width: 990px) {
     display: none;
@@ -43,6 +44,7 @@
 .app_header_content_nav_ul {
   @include flexbox-row;
   gap: $gap-4;
+  align-self: center;
 
 
   li a {

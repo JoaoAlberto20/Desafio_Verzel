@@ -44,6 +44,12 @@
   color: $gray200;
   font-size: 0.875rem;
   font-weight: 500;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .app_card_car_content_info_price {
@@ -54,6 +60,7 @@
   align-items: center;
 
   margin-top: 1rem;
+  height: 40px;
 }
 
 .app_card_car_content_info_price span {
@@ -121,6 +128,4 @@
       fill: red;
     }
   }
-
-
 }

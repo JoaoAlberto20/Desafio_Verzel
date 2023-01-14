@@ -7,7 +7,7 @@ import { FaTrash } from 'react-icons/fa'
 
 import styles from './styles.module.scss'
 
-interface CardProps {
+export interface CardProps {
   title: string
   year: number
   mileage: number

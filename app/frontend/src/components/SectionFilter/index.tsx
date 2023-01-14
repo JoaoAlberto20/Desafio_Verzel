@@ -18,7 +18,7 @@ export function SectionFilter() {
   }, [])
 
   return (
-    <section
+    <div
       className={styles.app_section_filters}
       aria-controls={`${isScrolling}`}
     >
@@ -50,6 +50,6 @@ export function SectionFilter() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

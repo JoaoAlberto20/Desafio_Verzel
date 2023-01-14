@@ -29,8 +29,8 @@
       "@services/*": [
         "src/services/*"
       ],
-      "@interfaces/*": [
-        "src/interfaces/*"
+      "@dtos/*": [
+        "src/dtos/*"
       ],
       "@assets/*": [
         "src/assets/*"
@@ -40,6 +40,9 @@
       ],
       "@utils/*": [
         "src/utils/*"
+      ],
+      "@storage/*": [
+        "src/storage/*"
       ]
     }
   },

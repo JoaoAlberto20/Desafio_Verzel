@@ -1,22 +1,32 @@
-import { Button } from '@components/Button'
-import { Input } from '@components/Input'
+import { useContext } from 'react'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { GlobalContext } from '@contexts/GlobalContext'
+
+import { Button } from '@components/Button'
+import { Input } from '@components/Input'
+
 import styles from './styles.module.scss'
 
 const loginFormSchemas = yup.object({
-  username: yup.string().required('Informe o seu nome de usuário.'),
+  email: yup
+    .string()
+    .email('Digite um email valido')
+    .required('Informe o seu nome de usuário.'),
   password: yup
     .string()
     .required('Informe a senha.')
-    .min(8, 'A senha deve ter pelo menos 8 digito.'),
+    .min(3, 'A senha deve ter pelo menos 8 digito.'),
 })
 
 type TypesLoginFormData = yup.InferType<typeof loginFormSchemas> & {}
 
 export default function Login() {
+  const { signIn } = useContext(GlobalContext)
+
   const {
     handleSubmit,
     control,
@@ -24,62 +34,64 @@ export default function Login() {
   } = useForm<TypesLoginFormData>({
     resolver: yupResolver(loginFormSchemas),
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   })
 
-  const handleLoginUser = async (data: TypesLoginFormData) => {
-    console.log(data)
+  const handleLoginUser = async ({ email, password }: TypesLoginFormData) => {
+    await signIn({ email, password })
   }
 
   return (
-    <div className={styles.app_login}>
-      <div className={styles.app_login_banner} />
-      <div className={styles.app_login_content}>
-        <form
-          className={styles.app_login_content_form}
-          onSubmit={handleSubmit(handleLoginUser)}
-        >
-          <strong>Painel administrativo</strong>
-          <Controller
-            control={control}
-            name="username"
-            render={({ field: { name, onChange, value } }) => (
-              <Input
-                type="text"
-                label="Username"
-                name={name}
-                onChange={onChange}
-                value={value}
-                placeholder="joaoalberto"
-                errorMessage={errors.username?.message}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { name, onChange, value } }) => (
-              <Input
-                type="password"
-                label="Password"
-                placeholder="@joao?lberto@"
-                name={name}
-                onChange={onChange}
-                value={value}
-                errorMessage={errors.password?.message}
-              />
-            )}
-          />
-          <div className={styles.app_login_content_form_forgot_password}>
-            <a href="#">Esqueceu a senha?</a>
-          </div>
-          <Button type="submit" disabled={!isValid}>
-            Iniciar sessão
-          </Button>
-        </form>
+    <>
+      <div className={styles.app_login}>
+        <div className={styles.app_login_banner} />
+        <div className={styles.app_login_content}>
+          <form
+            className={styles.app_login_content_form}
+            onSubmit={handleSubmit(handleLoginUser)}
+          >
+            <strong>Painel administrativo</strong>
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { name, onChange, value } }) => (
+                <Input
+                  type="text"
+                  label="E-mail"
+                  name={name}
+                  onChange={onChange}
+                  value={value}
+                  placeholder="admin@app.com"
+                  errorMessage={errors.email?.message}
+                />
+              )}
+            />
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { name, onChange, value } }) => (
+                <Input
+                  type="password"
+                  label="Password"
+                  placeholder="admin"
+                  name={name}
+                  onChange={onChange}
+                  value={value}
+                  errorMessage={errors.password?.message}
+                />
+              )}
+            />
+            <div className={styles.app_login_content_form_forgot_password}>
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+            <Button type="submit" disabled={!isValid}>
+              Iniciar sessão
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

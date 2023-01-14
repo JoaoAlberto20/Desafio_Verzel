@@ -1,4 +1,4 @@
-export interface ICars {
+export interface CarsDTO {
   id: string
   name: string
   brand: string
