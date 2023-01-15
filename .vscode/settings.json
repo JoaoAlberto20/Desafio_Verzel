@@ -2,10 +2,10 @@
   "editor.formatOnSave": true,
   "python.formatting.blackArgs": [
     "--line-length",
-    "100"
+    "110"
   ],
   "python.linting.flake8Args": [
     "--max-line-length",
-    "100",
+    "140",
   ]
 }

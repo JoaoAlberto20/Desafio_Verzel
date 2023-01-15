@@ -1,3 +1,5 @@
 env
 node_modules
 .mypy_cache
+
+docker-compose.dev.yml

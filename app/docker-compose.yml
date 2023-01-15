@@ -26,9 +26,9 @@ services:
     depends_on:
       - db
     environment:
-      - DJANGO_SUPERUSER_PASSWORD=joaoalberto
-      - DJANGO_SUPERUSER_USERNAME=joaoalberto
-      - DJANGO_SUPERUSER_EMAIL=joaoalbertosv15@gmail.com
+      - DJANGO_SUPERUSER_PASSWORD=admin123456
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_EMAIL=admin@app.com
   frontend:
     container_name: frontend
     build: ./frontend
