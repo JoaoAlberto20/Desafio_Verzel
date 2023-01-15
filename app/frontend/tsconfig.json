@@ -41,9 +41,6 @@
       "@utils/*": [
         "src/utils/*"
       ],
-      "@storage/*": [
-        "src/storage/*"
-      ]
     }
   },
   "include": [

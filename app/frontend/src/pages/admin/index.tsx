@@ -10,7 +10,7 @@ import { CardAmin } from '@components/Card/CardAmin'
 
 import { MdAddCircle } from 'react-icons/md'
 
-import styles from './styles.module.scss'
+import styles from '../../styles/pages/Admin.module.scss'
 
 import { ModalFormCar } from '@components/ModalFormCar'
 import * as Dialog from '@radix-ui/react-dialog'

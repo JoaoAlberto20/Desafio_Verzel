@@ -13,7 +13,7 @@ import { AppError } from '@utils/AppError'
 import { GetServerSideProps } from 'next'
 import Router from 'next/router'
 import { parseCookies } from 'nookies'
-import styles from './styles.module.scss'
+import styles from '../../styles/pages/Login.module.scss'
 
 const loginFormSchemas = yup.object({
   email: yup
@@ -91,7 +91,7 @@ export default function Login() {
                 <Input
                   type="password"
                   label="Password"
-                  placeholder="admin"
+                  placeholder="admin123456"
                   name={name}
                   onChange={onChange}
                   value={value}
