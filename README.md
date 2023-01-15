@@ -22,6 +22,10 @@ Essa aplicação foi feita para um desafio de emprego para empresa [Verzel](http
 
 <br />
 
+![Preview](./images/captura.png)
+
+<br />
+
 <details>
   <summary> 🖥️ Tecnologias Utilizadas no Backend</summary>
    <br />
@@ -74,43 +78,39 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 <br />
 
-### 🎲 Rodando a aplicação por completo (Backend, Frontend)
+### 🎲 Rodando a aplicação por completo (Backend, Frontend) com Docker
 
-Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicação, Postgresql usará a porta 5432 
+Será necessário que a porta 3000 e 8000 estejam disponíveis para a aplicação, Mysql usará a porta 3306 
 
 1 - Clone o repositório em uma pasta de sua preferencia 
 ```
-  $ git clone git@github.com:JoaoAlberto20/transfer-ngcash.git
-  $ cd transfer-ngcash
+  $ git clone git@github.com:JoaoAlberto20/Desafio_Verzel.git
+  $ cd Desafio_Verzel
 ```
-2 - E suba o dockercompose, todas as depêndencias serão automaticamente instaladas
+2 - E suba o docker-compose, todas as dependências serão automaticamente instaladas
 ```
-  ## este comando ira derrubar todas aplicações node no seu dispositivo recomendo rodar ele para continuar o processo
   $ killall node
   
   $ npm run compose:up:dev   // para subir a aplicação
-```
-3 - E entra na terminal do backend e rode o seguinte comando para subir as migrations
-```
-  $ docker exec -it backend bash
-  $ npx prisma migrate dev
-  $ exit // este comando  é pra sair do terminal do docker
-```
 
-4 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
+```
+3 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
 
 ```
   - Front End: http://localhost:3000
 
-  - Back End: http://localhost:3001
-
-  - Back End documentação : http://localhost:3001/api-docs
-```
-
-5 - E para parar a aplicação por completo  rode o seguinte comando 
+  - Back End: http://localhost:8000
 
 ```
+
+4 - E para parar a aplicação por completo  rode o seguinte comando 
+
+```
+
   $ npm run compose:down:dev
+
+  $ docker image prune -a
+
 ```
 ---
 
@@ -120,72 +120,83 @@ Será necessário que a porta 3000 e 3001 estejam disponíveis para a aplicaçã
 
 <br />
 
-## Criação e validação de usuário
-
-| Método | Funcionalidade | URL |
-|---|---|---|
-| `POST` | Realiza o login do usuário | http://localhost:3001/users |
-| `GET` | Verifica se o usuário possui um token valido | http://localhost:3001/users |
-
-Nessa requisição POST é necessário informar o seguinte JSON:
-
-```
-{
-  "username": "Username do usuário",
-  "password": "senha_secreta"
-  "confirmPassword": "e confirmação da senha_secreta"
-}
-
-```
-
 #### Login de usuário
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `POST` | Realiza o login do usuário | http://localhost:3001/login |
+| `POST` | Realiza o login do usuário | http://localhost:8000/api/auth/login/ |
+| `GET` | Verifica se o usuário possui um token valido | http://localhost:8000/auth/user |
 
 Nessa requisição POST é necessário informar o seguinte JSON:
 
 ```
 {
-  "username": "Username do usuário",
-  "password": "senha_secreta"
+  "email": "Email do admin",
+  "password": "senha_secreta do admin"
 }
 
 ```
 
-#### Balanço do usuário
+#### Listar Carros
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `GET` | Retorna o balanço da conta do usuário | http://localhost:3001/balance |
+| `GET` | Retorna o balanço da conta do usuário | http://localhost:8000/api/carros |
 
+```
+  [
+    {
+      "name": "Gol MSI 4P",
+      "brand": "Volkswagen",
+      "model": "Gol MSI 4P AUTOMÁTICO",
+      "image_url": "https://images.kavak.services/images/209294/EXTERIOR-frontSidePilotNear-1671133867953.jpeg?d=540x310",
+      "year": 2022,
+      "location": "Minas Gerais",
+      "mileage": 19865,
+      "original_value": "76599.00",
+    }
+  ]
 
-#### Transações
+```
+
+#### CRUD
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `POST` | Criação de uma transação | http://localhost:3001/transactions |
-| `GET` | Retorna todos as transações que o usuário participou | http://localhost:3001/transactions |
-| `GET` | Filtra as transação por tipo e/ou data da transação | http://localhost:3001/transactions/filter?type=type&date=date |
+| `POST` | Criação de uma transação | http://localhost:8000/api/carros |
+| `PATCH` | Retorna todos as transações que o usuário participou | http://localhost:8000/api/carros/id_do_carro |
+| `DELETE` | Filtra as transação por tipo e/ou data da transação | http://localhost:8000/api/carros/id_do_carro |
 
-Nessa requisição POST é necessário informar o seguinte JSON:
+Nessa requisição POST é necessário informar o seguinte JSON: 
 
 ```
 {
-  "username": FulanoDeTal, // Esse valor e referente para qual usuário que você ira enviar a transação
-  "value": 25.25, // O valor da transação deve ser em decimal ou Inteiro.
+	"name": "Gol MSI 4P",
+	"brand": "Volkswagen",
+	"model": "Gol MSI 4P AUTOMÁTICO",
+	"image_url": "https://images.kavak.services/images/209294/EXTERIOR-frontSidePilotNear-1671133867953.jpeg?d=540x310",
+	"year": 2022,
+	"location": "Minas Gerais",
+	"mileage": 19865,
+	"original_value": "76599.00",
 }
 
 ```
 
-e na requisição GET para FILTRAR as transações você deve passar  as seguintes QUERY:
+E na requisição PATCH pode passar apenas o dado que você que atualizar  e passar o ID do carro que você deseja atualizar no parâmetro da requisição:
 
 ```
 {
-  "type": all || cash-in || cash-out,
-  "date": Data da criação da transação
+  "name": "Gol MSI 4P",
 }
+
+```
+
+E na requisição DELETE pode passar apenas o ID do carro que você que deletar pelos parâmetro da requisição:
+
+```
+  http://localhost:8000/api/carros/id_do_carro
+
 ```
 
 <div id="license" />
