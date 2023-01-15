@@ -1,13 +1,13 @@
-import { LogoSvg, UserSvg } from '@assets/default'
+import { LogoSvg } from '@assets/default'
 import { GlobalContext } from '@contexts/GlobalContext'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useContext } from 'react'
 import styles from './styles.module.scss'
 
 export function Header() {
-  const { isAuthenticated } = useContext(GlobalContext)
+  const { isAuthenticated, user } = useContext(GlobalContext)
 
-  console.log(isAuthenticated)
   return (
     <header className={styles.app_header}>
       <div className={styles.app_header_content}>
@@ -27,12 +27,23 @@ export function Header() {
             <li></li>
           </ul>
         </nav>
-        <div className={styles.app_header_content_nav_login}>
-          <Link href="/login">
-            <UserSvg />
-            <span>Fazer login</span>
-          </Link>
-        </div>
+        {isAuthenticated ? (
+          <div className={styles.app_header_content_profile}>
+            <button>
+              <strong>{user?.username}</strong>
+              <Image
+                src="https://github.com/Joaoalberto20.png"
+                alt="Imagem do usuário"
+                width={40}
+                height={40}
+              />
+            </button>
+          </div>
+        ) : (
+          <div className={styles.app_header_content_nav_login}>
+            <Link href="/login">Fazer login</Link>
+          </div>
+        )}
       </div>
     </header>
   )

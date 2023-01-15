@@ -6,7 +6,7 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'api.ts', 'api.tsx'],
 
   images: {
-    domains: ['images.kavak.services', 'viladoscarros.com.br'],
+    domains: ['images.kavak.services', 'viladoscarros.com.br', 'github.com'],
   },
 
   webpack(config) {

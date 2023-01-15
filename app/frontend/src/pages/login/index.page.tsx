@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
@@ -9,6 +9,10 @@ import { GlobalContext } from '@contexts/GlobalContext'
 import { Button } from '@components/Button'
 import { Input } from '@components/Input'
 
+import { AppError } from '@utils/AppError'
+import { GetServerSideProps } from 'next'
+import Router from 'next/router'
+import { parseCookies } from 'nookies'
 import styles from './styles.module.scss'
 
 const loginFormSchemas = yup.object({
@@ -25,6 +29,7 @@ const loginFormSchemas = yup.object({
 type TypesLoginFormData = yup.InferType<typeof loginFormSchemas> & {}
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false)
   const { signIn } = useContext(GlobalContext)
 
   const {
@@ -40,7 +45,18 @@ export default function Login() {
   })
 
   const handleLoginUser = async ({ email, password }: TypesLoginFormData) => {
-    await signIn({ email, password })
+    try {
+      setIsLoading(true)
+      await signIn({ email, password })
+      Router.push('/admin')
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível entrar. Tente novamente mais tarde.'
+      alert(title)
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -86,7 +102,7 @@ export default function Login() {
             <div className={styles.app_login_content_form_forgot_password}>
               <a href="#">Esqueceu a senha?</a>
             </div>
-            <Button type="submit" disabled={!isValid}>
+            <Button type="submit" disabled={!isValid} isLoading={isLoading}>
               Iniciar sessão
             </Button>
           </form>
@@ -94,4 +110,21 @@ export default function Login() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { 'nextauth.token': token } = parseCookies(ctx)
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/admin',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }

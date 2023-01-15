@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.forms.models import model_to_dict
-from rest_framework.exceptions import AuthenticationFailed
+from errors.exceptions import CustomAuthenticationFailed
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,15 +17,13 @@ class LoginView(TokenObtainPairView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        print(serializer.data)
-
         user = authenticate(
             request,
             email=serializer.validated_data["email"],
             password=serializer.validated_data["password"],
         )
         if user is None or not user.is_active:
-            raise AuthenticationFailed(("Invalid credentials"))
+            raise CustomAuthenticationFailed("Credenciais inváliadas")
 
         user_data = model_to_dict(user)
         user_data.pop("password", None)

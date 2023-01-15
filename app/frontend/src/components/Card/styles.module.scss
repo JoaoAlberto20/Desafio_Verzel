@@ -75,6 +75,10 @@
   @include flexbox-row;
   align-items: center;
   gap: 8px;
+
+  button {
+    cursor: pointer
+  }
 }
 
 .app_card_car_content_info_price div .button_edit {
@@ -99,8 +103,6 @@
 }
 
 .app_card_car_content_info_price div .button_remove {
-  all: unset;
-
   @include flexbox-row;
   align-items: center;
   justify-content: center;

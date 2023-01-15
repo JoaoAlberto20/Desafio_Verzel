@@ -20,3 +20,12 @@
     cursor: not-allowed;
   }
 }
+
+.app_login_content_form_button[aria-pressed="true"] {
+  position: relative;
+
+  opacity: 0.8;
+  cursor: not-allowed;
+
+  
+}

@@ -67,7 +67,6 @@
 
 
 .app_header_content_nav_login {
-  margin-left: $gap-4;
 
   a {
     @include flexbox-row;
@@ -81,5 +80,37 @@
     color: $gray500;
     opacity: 0.85;
   }
+}
 
+.app_header_content_profile {
+
+  height: 58px;
+  padding: 0 0.75rem;
+  border-radius: 4px;
+
+  button {
+    @include flexbox-row;
+    height: 100%;
+    align-items: center;
+    gap: 1rem;
+
+  }
+
+  button strong {
+    font-size: 20px;
+    font-weight: 700;
+    color: $gray500;
+    opacity: 0.85;
+    text-transform: capitalize;
+    cursor: pointer;
+  }
+
+  button img {
+    border-radius: 50%;
+  }
+
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
 }
