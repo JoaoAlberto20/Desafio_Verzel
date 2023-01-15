@@ -24,7 +24,12 @@ services:
     platform: linux/x86_64
     working_dir: /app-backend
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:8000" ]
+      timeout: 10s
+      retries: 5
     environment:
       - DJANGO_SUPERUSER_PASSWORD=admin123456
       - DJANGO_SUPERUSER_USERNAME=admin
@@ -37,6 +42,12 @@ services:
     platform: linux/x86_64
     working_dir: /app-frontend
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
+      timeout: 10s
+      retries: 5
+
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000/api

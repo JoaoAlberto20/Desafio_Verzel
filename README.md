@@ -120,7 +120,7 @@ Será necessário que a porta 3000 e 8000 estejam disponíveis para a aplicaçã
 
 <br />
 
-#### Login de usuário
+### Login de usuário
 
 | Método | Funcionalidade | URL |
 |---|---|---|
@@ -137,11 +137,11 @@ Nessa requisição POST é necessário informar o seguinte JSON:
 
 ```
 
-#### Listar Carros
+### Listar Carros
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `GET` | Retorna o balanço da conta do usuário | http://localhost:8000/api/carros |
+| `GET` | Retornar a lista de todos os carros | http://localhost:8000/api/carros |
 
 ```
   [
@@ -159,13 +159,13 @@ Nessa requisição POST é necessário informar o seguinte JSON:
 
 ```
 
-#### CRUD
+### CRUD
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `POST` | Criação de uma transação | http://localhost:8000/api/carros |
-| `PATCH` | Retorna todos as transações que o usuário participou | http://localhost:8000/api/carros/id_do_carro |
-| `DELETE` | Filtra as transação por tipo e/ou data da transação | http://localhost:8000/api/carros/id_do_carro |
+| `POST` | Criação de um carro | http://localhost:8000/api/carros |
+| `PATCH` | Atualização de um o carro | http://localhost:8000/api/carros/id_do_carro |
+| `DELETE` | Deleção de um carro | http://localhost:8000/api/carros/id_do_carro |
 
 Nessa requisição POST é necessário informar o seguinte JSON: 
 
