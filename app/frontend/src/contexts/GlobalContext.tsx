@@ -34,42 +34,27 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
   const [user, setUser] = useState<UsersDTO | null>(null)
   const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true)
 
-  const userAndTokenUpdate = async (userData: UsersDTO, token: string) => {
-    setCookie(undefined, 'nextauth.token', token, {
-      maxAge: 60 * 60 * 1, // 1 hour
-    })
+  const userAndTokenUpdate = (userData: UsersDTO, token: string) => {
     api.defaults.headers.common.Authorization = `Bearer ${token}`
     setUser(userData)
   }
 
+  const saveUserEndTokenCookies = async (userData: UsersDTO, token: string) => {
+    setCookie(undefined, 'nextauth.user', JSON.stringify({ userData, token }), {
+      maxAge: 60 * 60 * 1, // 1 hour
+    })
+  }
+
   const signIn = useCallback(async ({ email, password }: SignInDTO) => {
     try {
+      setIsLoadingUserStorageData(true)
       const { data } = await api.post('auth/login/', {
         email,
         password,
       })
       if (data.user && data.token) {
         userAndTokenUpdate(data.user, data.token.access)
-      }
-    } catch (error) {
-      throw error
-    }
-  }, [])
-
-  const signOut = async () => {
-    destroyCookie(null, 'nextauth.token')
-    setUser(null)
-  }
-
-  const loadUserData = useCallback(async () => {
-    try {
-      const { 'nextauth.token': token } = parseCookies()
-      if (token) {
-        setIsLoadingUserStorageData(true)
-        const { data } = await api.get<UsersDTO>('auth/user/', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        userAndTokenUpdate(data, token)
+        saveUserEndTokenCookies(data.user, data.token.access)
       }
     } catch (error) {
       throw error
@@ -78,9 +63,24 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
     }
   }, [])
 
+  const signOut = useCallback(async () => {
+    destroyCookie(null, 'nextauth.user', {
+      path: '/',
+    })
+    setUser(null)
+  }, [])
+
   useEffect(() => {
+    const loadUserData = () => {
+      const { 'nextauth.user': user } = parseCookies()
+
+      if (user) {
+        const userCookie = JSON.parse(user)
+        userAndTokenUpdate(userCookie.userData, userCookie.token)
+      }
+    }
     loadUserData()
-  }, [loadUserData])
+  }, [])
 
   const isAuthenticated = !!user && user.is_superuser
 
@@ -92,7 +92,7 @@ export function GlobalProvider({ children }: GlobalProviderProps) {
       isAuthenticated,
       isLoadingUserStorageData,
     }),
-    [isAuthenticated, user, signIn, isLoadingUserStorageData],
+    [user, signIn, signOut, isAuthenticated, isLoadingUserStorageData],
   )
 
   return (

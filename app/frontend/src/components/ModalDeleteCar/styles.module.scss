@@ -3,7 +3,7 @@
 .app_modal_delete_car_overlay {
   position: fixed;
   inset: 0;
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: 150ms cubic-bezier(0.16, 1, 0.3, 1);
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
 }
@@ -39,6 +39,36 @@
   display: flex;
   gap: 25px;
   justify-content: flex-end;
+}
+
+.button_remove {
+  @include flexbox-row;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  border-radius: 100%;
+
+  transition: all 0.3s;
+
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+
+    fill: $gray500;
+    transition: all 0.3s;
+
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+
+    svg {
+      fill: red;
+    }
+  }
 }
 
 .app_modal_delete_car_content_button button {

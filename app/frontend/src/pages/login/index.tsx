@@ -113,9 +113,9 @@ export default function Login() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { 'nextauth.token': token } = parseCookies(ctx)
+  const { 'nextauth.user': user } = parseCookies(ctx)
 
-  if (token) {
+  if (user) {
     return {
       redirect: {
         destination: '/admin',

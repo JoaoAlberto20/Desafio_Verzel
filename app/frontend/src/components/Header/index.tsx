@@ -17,11 +17,15 @@ export function Header() {
         <nav className={styles.app_header_content_nav}>
           <ul className={styles.app_header_content_nav_ul}>
             <li>
-              <Link href="/">Nossos Carros</Link>
+              <Link href="/" legacyBehavior>
+                Nossos Carros
+              </Link>
             </li>
             {isAuthenticated && (
               <li>
-                <Link href="/admin">Administração</Link>
+                <Link href="/admin" legacyBehavior>
+                  Administração
+                </Link>
               </li>
             )}
             <li></li>
@@ -41,7 +45,9 @@ export function Header() {
           </div>
         ) : (
           <div className={styles.app_header_content_nav_login}>
-            <Link href="/login">Fazer login</Link>
+            <Link href="/login" legacyBehavior>
+              Fazer login
+            </Link>
           </div>
         )}
       </div>

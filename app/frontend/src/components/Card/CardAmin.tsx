@@ -2,14 +2,10 @@ import Image from 'next/image'
 
 import { formatCurrency } from '@utils/formatCurrency'
 
-import * as Dialog from '@radix-ui/react-dialog'
-
-import { FaTrash } from 'react-icons/fa'
-
 import { CardProps } from '.'
 
+import { EditCarModal } from '@components/Modal/EditCarModal'
 import { ModalDeleteCar } from '@components/ModalDeleteCar'
-import { ModalFormCar } from '@components/ModalFormCar'
 import styles from './styles.module.scss'
 
 export function CardAmin({ car }: CardProps) {
@@ -30,30 +26,8 @@ export function CardAmin({ car }: CardProps) {
           <div className={styles.app_card_car_content_info_price}>
             <span>{formatCurrency.format(Number(car.original_value))}</span>
             <div>
-              <Dialog.Root>
-                <Dialog.Trigger asChild>
-                  <button
-                    type="button"
-                    className={styles.button_edit}
-                    title="Remover veículo"
-                  >
-                    Editar
-                  </button>
-                </Dialog.Trigger>
-                <ModalFormCar isEdit carEdit={car} />
-              </Dialog.Root>
-              <Dialog.Root>
-                <Dialog.Trigger asChild>
-                  <button
-                    type="button"
-                    className={styles.button_remove}
-                    title="Remover veículo"
-                  >
-                    <FaTrash />
-                  </button>
-                </Dialog.Trigger>
-                <ModalDeleteCar idCar={car.id} />
-              </Dialog.Root>
+              <EditCarModal carEdit={car} />
+              <ModalDeleteCar idCar={car.id} />
             </div>
           </div>
         </div>

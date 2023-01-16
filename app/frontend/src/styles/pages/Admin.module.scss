@@ -10,25 +10,3 @@
   grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
   grid-row-gap: $gap-2;
 }
-
-.button_add_new_car {
-  @include flexbox-row;
-  align-items: center;
-  justify-content: center;
-  background-color: $white;
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
-  cursor: pointer;
-
-  transition: all 0.3s;
-
-  &:hover {
-    box-shadow: 0 10px 25px rgb(60 72 88 / 15%), 0 3px 2px -2px rgb(70 70 70 / 15%);
-  }
-
-  svg {
-    height: 2rem;
-    width: 2rem;
-  }
-}

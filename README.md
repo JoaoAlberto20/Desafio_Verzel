@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-	 Status: Em Andamento
+	 Status: Terminado
 </h4>
 
 <p align="center">
@@ -22,7 +22,42 @@ Essa aplicação foi feita para um desafio de emprego para empresa [Verzel](http
 
 <br />
 
-![Preview](./images/captura.png)
+
+<table width="100%">
+  <tr>
+    <td>
+      <h2 align="center">
+        <a 
+          href="" 
+          target="_blank"
+        >
+          Aplicação web
+        </a>
+      </h2>
+      <img 
+        width="100%" 
+        src="./images/capturaApplication.png" 
+        alt="Preview Aplicação Web" 
+      />
+    </td>
+    <td>
+      <h2 align="center">
+        <a 
+          href="" 
+          target="_blank"
+        >
+          Documentação Bckend
+        </a>
+      </h2>
+      <img 
+        width="100%" 
+        src="./images/capturaSwagger.png" 
+        alt="Preview Documentação do backend" 
+      />
+    </td>
+  </tr>
+</table>
+
 
 <br />
 
@@ -94,12 +129,14 @@ Será necessário que a porta 3000 e 8000 estejam disponíveis para a aplicaçã
   $ npm run compose:up:dev   // para subir a aplicação
 
 ```
-3 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponivel nas seguintes rotas:
+3 - Após rodar os comando, aguarde um pouco que a aplicação irá ficar disponível nas seguintes rotas:
 
 ```
   - Front End: http://localhost:3000
 
   - Back End: http://localhost:8000
+
+  - Documentação Backend: http://localhost:8000/swagger/
 
 ```
 

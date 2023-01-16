@@ -1,5 +1,6 @@
-import * as AlertDialog from '@radix-ui/react-dialog'
+import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import { api } from '@services/api'
+import { FaTrash } from 'react-icons/fa'
 
 import styles from './styles.module.scss'
 
@@ -18,33 +19,47 @@ export function ModalDeleteCar({ idCar }: ModalDeleteCarProps) {
   }
 
   return (
-    <AlertDialog.Portal>
-      <AlertDialog.Overlay className={styles.app_modal_delete_car_overlay} />
-      <AlertDialog.Content className={styles.app_modal_delete_car_content}>
-        <AlertDialog.Title
-          className={styles.app_modal_delete_car_content_title}
+    <AlertDialog.Root>
+      <AlertDialog.Trigger asChild>
+        <button
+          type="button"
+          className={styles.button_remove}
+          title="Remover veículo"
         >
-          Are you absolutely sure?
-        </AlertDialog.Title>
-        <AlertDialog.Description
-          className={styles.app_modal_delete_car_content_description}
-        >
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </AlertDialog.Description>
-        <div className={styles.app_modal_delete_car_content_button}>
-          <AlertDialog.Close asChild>
-            <button className={styles.button_cancel}>Cancel</button>
-          </AlertDialog.Close>
-          <button
-            type="button"
-            className={styles.button_delete}
-            onClick={handleDeleteCar}
+          <FaTrash />
+        </button>
+      </AlertDialog.Trigger>
+
+      <AlertDialog.Portal>
+        <AlertDialog.Overlay className={styles.app_modal_delete_car_overlay} />
+        <AlertDialog.Content className={styles.app_modal_delete_car_content}>
+          <AlertDialog.Title
+            className={styles.app_modal_delete_car_content_title}
           >
-            Yes, delete account
-          </button>
-        </div>
-      </AlertDialog.Content>
-    </AlertDialog.Portal>
+            Você tem certeza absoluta que você quer deletar?
+          </AlertDialog.Title>
+          <AlertDialog.Description
+            className={styles.app_modal_delete_car_content_description}
+          >
+            Essa ação não pode ser desfeita. Isso excluirá permanentemente esse
+            dados de nossos servidores.
+          </AlertDialog.Description>
+          <div className={styles.app_modal_delete_car_content_button}>
+            <AlertDialog.Cancel asChild>
+              <button className={styles.button_cancel}>Cancelar</button>
+            </AlertDialog.Cancel>
+            <AlertDialog.Action asChild>
+              <button
+                type="button"
+                className={styles.button_delete}
+                onClick={handleDeleteCar}
+              >
+                Sim, deletar dados
+              </button>
+            </AlertDialog.Action>
+          </div>
+        </AlertDialog.Content>
+      </AlertDialog.Portal>
+    </AlertDialog.Root>
   )
 }

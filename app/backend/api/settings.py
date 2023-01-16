@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "cars",
     "users",
     "corsheaders",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,6 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK = {
-    "NON_FIELD_ERRORS_KEY": "errors",
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
@@ -70,7 +70,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=7),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "SIGNING_KEY": SECRET_KEY,
     "AUTH_HEADER_TYPES": ("Bearer"),

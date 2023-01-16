@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { useContext, useEffect, useState } from 'react'
 
 import { api } from '@services/api'
 
@@ -8,34 +9,51 @@ import { CarsDTO } from '@dtos/CarsDTO'
 
 import { CardAmin } from '@components/Card/CardAmin'
 
-import { MdAddCircle } from 'react-icons/md'
-
 import styles from '../../styles/pages/Admin.module.scss'
 
-import { ModalFormCar } from '@components/ModalFormCar'
-import * as Dialog from '@radix-ui/react-dialog'
+import { AddCarModal } from '@components/Modal/AddCarModal'
+import { GlobalContext } from '@contexts/GlobalContext'
+import { AppError } from '@utils/AppError'
 
-interface AdminProps {
-  cars: Array<CarsDTO>
-}
+export default function Admin() {
+  const [cars, setCars] = useState<CarsDTO[]>([])
+  const [loading, setLoading] = useState(false)
+  const { signOut } = useContext(GlobalContext)
 
-export default function Admin({ cars }: AdminProps) {
+  useEffect(() => {
+    const getFetchCars = async () => {
+      try {
+        setLoading(true)
+        const { data } = await api.get<CarsDTO[]>('/carros')
+        setCars(data)
+      } catch (error) {
+        const isAppError = error instanceof AppError
+        const title = isAppError
+          ? `${error.message}. Fazer login novamente.`
+          : 'Não foi possível entrar. Tente novamente mais tarde.'
+        alert(title)
+        signOut()
+      } finally {
+        setLoading(false)
+      }
+    }
+    getFetchCars()
+  }, [signOut])
+
   const orderCar = cars.sort((a, b) => {
     return Number(b.original_value) - Number(a.original_value)
   })
+
+  if (loading) {
+    return <h1>Loading</h1>
+  }
+
   return (
     <main>
       <section>
         <div className={styles.app_layout_content}>
           <div className={styles.app_layout_content_cards}>
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
-                <button className={styles.button_add_new_car}>
-                  <MdAddCircle />
-                </button>
-              </Dialog.Trigger>
-              <ModalFormCar />
-            </Dialog.Root>
+            <AddCarModal />
             {orderCar.length > 0 &&
               orderCar.map((car) => <CardAmin key={car.id} car={car} />)}
           </div>
@@ -46,9 +64,9 @@ export default function Admin({ cars }: AdminProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { 'nextauth.token': token } = parseCookies(ctx)
+  const { 'nextauth.user': user } = parseCookies(ctx)
 
-  if (!token) {
+  if (!user) {
     return {
       redirect: {
         destination: '/',
@@ -57,11 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
-  const { data } = await api.get<CarsDTO[]>('/carros')
-
   return {
-    props: {
-      cars: data,
-    },
+    props: {},
   }
 }
